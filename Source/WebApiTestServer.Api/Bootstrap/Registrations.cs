@@ -1,4 +1,4 @@
-﻿namespace WebApiTestServer.Api
+﻿namespace WebApiTestServer.Api.Bootstrap
 {
     using System;
     using System.Collections.Generic;

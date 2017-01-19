@@ -3,7 +3,6 @@
     using System;
 
     using Dawn.Owin;
-    using Dawn.SampleApi.Bootstrap;
 
     using Owin;
 

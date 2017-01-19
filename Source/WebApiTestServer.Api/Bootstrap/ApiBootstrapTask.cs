@@ -1,14 +1,13 @@
-namespace Dawn.SampleApi.Bootstrap
-{    
+namespace WebApiTestServer.Api.Bootstrap
+{
     using System.Collections.Generic;
     using System.Web.Http;
- 
-    using global::Dawn.Owin;
-    using global::Dawn.WebApi;
 
-    using global::Owin;
+    using Dawn.Owin;
+    using Dawn.WebApi;
 
-    using WebApiTestServer.Api;
+    using Owin;
+
     using WebApiTestServer.Api.Bootstrap.Tasks;
 
     public class ApiBootstrapTask : IOwinBootstrapTask
