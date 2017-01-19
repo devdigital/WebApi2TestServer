@@ -21,7 +21,7 @@ namespace WebApiTestServer.Api
     {
         public void Configuration(IAppBuilder app)
         {
-            new Bootstrap.Bootstrap(app).Run();
+            new Bootstrap.Bootstrapper(app).Run();
             var configuration = new HttpConfiguration();
             ConfigureRouting(configuration);
             ConfigureSerialization(configuration);

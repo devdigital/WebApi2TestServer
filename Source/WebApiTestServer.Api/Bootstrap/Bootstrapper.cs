@@ -3,16 +3,17 @@
     using System;
 
     using Dawn.Owin;
+    using Dawn.SampleApi.Bootstrap;
 
     using Owin;
 
-    public class Bootstrap
+    public class Bootstrapper
     {
         private readonly IAppBuilder app;
 
         private readonly Registrations registrations;
 
-        public Bootstrap(IAppBuilder app, Registrations registrations = null)
+        public Bootstrapper(IAppBuilder app, Registrations registrations = null)
         {
             if (app == null)
             {

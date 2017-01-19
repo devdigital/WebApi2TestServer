@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\ApiBootstrapTask.cs" />
-    <Compile Include="Bootstrap\Bootstrap.cs" />
+    <Compile Include="Bootstrap\Bootstrapper.cs" />
     <Compile Include="Bootstrap\Tasks\ContainerBootstrapTask.cs" />
     <Compile Include="Bootstrap\Tasks\JsonBootstrapTask.cs" />
     <Compile Include="Bootstrap\Tasks\RoutingWebApiBootstrapTask.cs" />

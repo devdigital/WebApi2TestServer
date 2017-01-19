@@ -87,14 +87,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests\Class1.cs" />
+    <Compile Include="Models\MyTestServerFactory.cs" />
+    <Compile Include="Tests\Foo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\TestBootstrap.cs" />
+    <Compile Include="Models\TestStartup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\WebApiTestServer.Api\WebApiTestServer.Api.csproj">
+      <Project>{FE094737-89F0-48A0-B462-F2AD35D26C7D}</Project>
+      <Name>WebApiTestServer.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApiTestServer\WebApiTestServer.csproj">
       <Project>{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}</Project>
       <Name>WebApiTestServer</Name>

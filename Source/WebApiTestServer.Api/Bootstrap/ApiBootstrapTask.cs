@@ -11,11 +11,11 @@ namespace Dawn.SampleApi.Bootstrap
     using WebApiTestServer.Api;
     using WebApiTestServer.Api.Bootstrap.Tasks;
 
-    public class ApiBootstrapperTask : IOwinBootstrapTask
+    public class ApiBootstrapTask : IOwinBootstrapTask
     {        
         private readonly Registrations registrations;
 
-        public ApiBootstrapperTask(Registrations registrations)
+        public ApiBootstrapTask(Registrations registrations)
         {
             this.registrations = registrations;
         }
@@ -24,7 +24,7 @@ namespace Dawn.SampleApi.Bootstrap
         {
             var configuration = new HttpConfiguration();
 
-            new ContainerBootstrapTask(this.typeRegistrations, this.instanceRegistrations).Run(configuration);
+            new ContainerBootstrapTask(this.registrations).Run(configuration);
             var tasks = new List<IWebApiBootstrapTask>
             {
                 new RoutingWebApiBootstrapTask(),
