@@ -89,9 +89,16 @@
   <ItemGroup>
     <Compile Include="Tests\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\TestBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApiTestServer\WebApiTestServer.csproj">
+      <Project>{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}</Project>
+      <Name>WebApiTestServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApiTestServer.Api.IntegrationTests
+﻿namespace WebApiTestServer
 {
+    using System;
+    using System.Collections.Generic;
+
     using Microsoft.Owin.Testing;
-
-    using Owin;
-
-    using Xunit;
-
-    public class Foo
-    {
-        [Theory]
-        public void Test(TestServerFactory testServerFactory)
-        {
-
-        }
-    }
 
     public class TestServerFactory
     {
+        private readonly ITestStartup testStartup;
+
         private Dictionary<Type, Type> TypeRegistrations { get; }
         
         private Dictionary<Type, object> InstanceRegistrations { get; }
 
-        public TestServerFactory()
+        public TestServerFactory(ITestStartup testStartup)
         {
+            if (testStartup == null)
+            {
+                throw new ArgumentNullException(nameof(testStartup));
+            }
+
+            this.testStartup = testStartup;
+
             this.TypeRegistrations = new Dictionary<Type, Type>();
             this.InstanceRegistrations = new Dictionary<Type, object>();
         }
@@ -60,22 +53,10 @@ namespace WebApiTestServer.Api.IntegrationTests
             return this;
         }
 
-        public TestServer Create(ITestStartup testStartup)
+        public TestServer Create()
         {
-            if (testStartup == null)
-            {
-                throw new ArgumentNullException(nameof(testStartup));
-            }
-
-            return TestServer.Create(a => testStartup.Bootstrap(a, this.TypeRegistrations, this.InstanceRegistrations));
+            var registrations = new Registrations(this.TypeRegistrations, this.InstanceRegistrations);
+            return TestServer.Create(app => this.testStartup.Bootstrap(app, registrations));
         }
-    }
-
-    public interface ITestStartup
-    {
-        void Bootstrap(
-            IAppBuilder builder,
-            IDictionary<Type, Type> typeRegistrations,
-            IDictionary<Type, object> instanceRegistrations);
     }
 }

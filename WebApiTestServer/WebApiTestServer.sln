@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTestServer.Api", "..\Source\WebApiTestServer.Api\WebApiTestServer.Api.csproj", "{FE094737-89F0-48A0-B462-F2AD35D26C7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTestServer.Api.IntegrationTests", "WebApiTestServer.Api.IntegrationTests\WebApiTestServer.Api.IntegrationTests.csproj", "{D4DDF399-A434-4DE1-93A1-CEB813BFB44F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{0C46A483-A82F-4531-8BD6-C0399666A1A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{96B9B69F-48E0-41E1-A347-F0CD5D904A39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTestServer", "WebApiTestServer\WebApiTestServer.csproj", "{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +27,17 @@ Global
 		{D4DDF399-A434-4DE1-93A1-CEB813BFB44F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4DDF399-A434-4DE1-93A1-CEB813BFB44F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4DDF399-A434-4DE1-93A1-CEB813BFB44F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE094737-89F0-48A0-B462-F2AD35D26C7D} = {0C46A483-A82F-4531-8BD6-C0399666A1A3}
+		{D4DDF399-A434-4DE1-93A1-CEB813BFB44F} = {0C46A483-A82F-4531-8BD6-C0399666A1A3}
+		{9DC9BA24-D221-4908-9806-2EA3E7D8F3A8} = {96B9B69F-48E0-41E1-A347-F0CD5D904A39}
 	EndGlobalSection
 EndGlobal

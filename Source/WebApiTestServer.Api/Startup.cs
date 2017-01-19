@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(WebApiTestServer.Api.Startup))]
@@ -23,6 +21,7 @@ namespace WebApiTestServer.Api
     {
         public void Configuration(IAppBuilder app)
         {
+            new Bootstrap.Bootstrap(app).Run();
             var configuration = new HttpConfiguration();
             ConfigureRouting(configuration);
             ConfigureSerialization(configuration);
