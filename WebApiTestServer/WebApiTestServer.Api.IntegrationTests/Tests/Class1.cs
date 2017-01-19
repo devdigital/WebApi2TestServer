@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebApiTestServer.Api.IntegrationTests
 {
+    using Microsoft.Owin.Testing;
+
+    using Owin;
+
     using Xunit;
 
     public class Foo
@@ -13,6 +17,7 @@ namespace WebApiTestServer.Api.IntegrationTests
         [Theory]
         public void Test(TestServerFactory testServerFactory)
         {
+
         }
     }
 
@@ -54,5 +59,23 @@ namespace WebApiTestServer.Api.IntegrationTests
             this.InstanceRegistrations[typeof(TInterface)] = instance;
             return this;
         }
+
+        public TestServer Create(ITestStartup testStartup)
+        {
+            if (testStartup == null)
+            {
+                throw new ArgumentNullException(nameof(testStartup));
+            }
+
+            return TestServer.Create(a => testStartup.Bootstrap(a, this.TypeRegistrations, this.InstanceRegistrations));
+        }
+    }
+
+    public interface ITestStartup
+    {
+        void Bootstrap(
+            IAppBuilder builder,
+            IDictionary<Type, Type> typeRegistrations,
+            IDictionary<Type, object> instanceRegistrations);
     }
 }
