@@ -53,7 +53,7 @@
             return this;
         }
 
-        public TestServer Create()
+        public virtual TestServer Create()
         {
             var registrations = new Registrations(this.TypeRegistrations, this.InstanceRegistrations);
             return TestServer.Create(app => this.testStartup.Bootstrap(app, registrations));
