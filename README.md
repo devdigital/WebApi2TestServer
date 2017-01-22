@@ -21,7 +21,7 @@ First, we implement `ITestStartup`. This requires a single method implementation
 Here, we convert the registrations to a domain equivalent, and pass them onto a custom bootstrapper:
 
 ```
-public class TestStartup : ITestStartup
+public class SampleTestStartup : ITestStartup
 {
     public void Bootstrap(IAppBuilder app, WebApiTestServer.Registrations registrations)
     {
@@ -34,7 +34,7 @@ public class TestStartup : ITestStartup
 }
 ```
 
-The `Bootstrapper` type here then configures our container (Autofac) in this case and registers the provided registrations *after* all other registrations:
+The `Bootstrapper` type here then configures our container (Autofac in this case) and registers the provided registrations *after* all other registrations:
 
 ```
 public Bootstrapper(IAppBuilder app, Registrations registrations = null)
@@ -73,4 +73,44 @@ public void Run()
 ```
 
 # Writing Tests
+
+With a bootstrapper in place which takes additional registrations, and an `ITestStartup` implementation which uses the bootstrapper during tests, the next step is to use the `TestServerFactory` during tests to use your production bootstrapping with additional overrides. 
+
+The `TestServerFactory` constructor takes an instance of `ITestStartup`. It's recommended to reduce boilerplace by creating your own test server factory which passes your `ITestStartup` implementation to the base constructor:
+
+```
+namespace WebApiTestServer.Api.IntegrationTests.Models
+{
+    public class SampleTestServerFactory : TestServerFactory
+    {
+        public SampleTestServerFactory() : base(new SampleTestStartup())
+        {
+        }
+    }
+}
+```
+
+You can then use your test server factory within your tests:
+
+```
+[Theory]
+[AutoData]
+public void Test(MyTestServerFactory testServerFactory)
+{
+  var instance = new MyOtherService(...);
+  using (var serverFactory = testServerFactory.With<IMyService, MyService>().With<IMyOtherService>(instance).Create())
+  {
+    var values = serverFactory.HttpClient.GetAsync("/api/values").Result.AsCollection<int>();
+    Assert.Equal(new[] { 1, 2, 3 }, values);
+  }
+}
+```
+
+> Note this sample uses AutoFixture to allow us to inject the test server factory into the test method. This reduces the arrange part of the test.
+
+The `TestServerFactory` provides `With<TServiceInterface, TServiceImplementation>` and `With<TServiceInterface>(object instance)` methods - these are passed to the `ITestStartup Bootstrap` method as type and instance registrations respectively. You can continue to chain the `With` calls to register additional service implementations for your tests.
+
+The `Create` method returns a `TestServer` instance which can then be used to make HTTP requests.
+
+If you wish to provide more specialist helper methods within the builder, then you can add them to your derived class (e.g. `SampleTestServerFactory`.
 
