@@ -12,7 +12,7 @@ install-package WebApi2TestServer
 ```
 
 The package provides a `TestServerFactory` which creates a Microsoft.Owin.Testing `TestServer`. It allows you to register types and instances via a builder pattern. 
-These registrations are then passed to a startup class that you define. You should register 
+These registrations are then passed to a startup class that you define. You should register these types and instances with your IoC container (see below).
 
 > Note in this example we will use Autofac as our IoC container, but you can use any container. With Autofac, the last regsitration wins, so we just 
 have to ensure that the registrations that are passed to our startup class are registered *after* our standard production registrations.
@@ -95,7 +95,7 @@ You can then use your test server factory within your tests:
 ```
 [Theory]
 [AutoData]
-public void Test(MyTestServerFactory testServerFactory)
+public void Test(SampleTestServerFactory testServerFactory)
 {
   var instance = new MyOtherService(...);
   using (var serverFactory = testServerFactory.With<IMyService, MyService>().With<IMyOtherService>(instance).Create())
