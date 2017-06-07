@@ -54,16 +54,19 @@ public void Run()
     
     //... normal application container registrations here
     
-    // Register additional registrations provided to the bootstrapper
-    // These will override any previous registrations
-    foreach (var typeRegistration in this.registrations.TypeRegistrations)
+    if (this.registrations != null)
     {
-      builder.RegisterType(typeRegistration.Value).As(typeRegistration.Key);
-    }
+        // Register additional registrations provided to the bootstrapper
+        // These will override any previous registrations
+        foreach (var typeRegistration in this.registrations.TypeRegistrations)
+        {
+          builder.RegisterType(typeRegistration.Value).As(typeRegistration.Key);
+        }
 
-    foreach (var instanceRegistration in this.registrations.InstanceRegistrations)
-    {
-      builder.RegisterInstance(instanceRegistration.Value).As(instanceRegistration.Key);
+        foreach (var instanceRegistration in this.registrations.InstanceRegistrations)
+        {
+          builder.RegisterInstance(instanceRegistration.Value).As(instanceRegistration.Key);
+        }
     }
     
     // Register our Autofac based dependency resolver
