@@ -1,6 +1,6 @@
-# WebApiTestServer
+# WebApi2TestServer
 
-WebApiTestServer is a simple test helper for testing APIs developed with ASP.NET Web API 2 and OWIN/Katana. 
+WebApi2TestServer is a simple test helper for testing APIs developed with ASP.NET Web API 2 and OWIN/Katana. 
 It uses the `Microsoft.Owin.Testing` package and provides a builder pattern for registering overrides within your IoC container.
 
 # Usage
