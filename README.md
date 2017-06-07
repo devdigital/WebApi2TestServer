@@ -8,7 +8,7 @@ It uses the `Microsoft.Owin.Testing` package and provides a builder pattern for 
 Create a test project for your API and install the `WebApi2TestServer` package:
 
 ```
-npm install WebApi2TestServer
+install-package WebApi2TestServer
 ```
 
 The package provides a `TestServerFactory` which creates a Microsoft.Owin.Testing `TestServer`. It allows you to register types and instances via a builder pattern. 
