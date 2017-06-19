@@ -117,7 +117,7 @@ You can then use your test server factory within your tests:
 ```
 [Theory]
 [AutoData]
-public Task Test(SampleTestServerFactory testServerFactory)
+public async Task Test(SampleTestServerFactory testServerFactory)
 {
   var instance = new MyOtherService(...);
   using (var serverFactory = testServerFactory
