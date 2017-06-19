@@ -98,12 +98,16 @@ You can then use your test server factory within your tests:
 ```
 [Theory]
 [AutoData]
-public void Test(SampleTestServerFactory testServerFactory)
+public Task Test(SampleTestServerFactory testServerFactory)
 {
   var instance = new MyOtherService(...);
-  using (var serverFactory = testServerFactory.With<IMyService, MyService>().With<IMyOtherService>(instance).Create())
+  using (var serverFactory = testServerFactory
+      .With<IMyService, MyService>()
+      .With<IMyOtherService>(instance)
+      .Create())
   {
-    var values = serverFactory.HttpClient.GetAsync("/api/values").Result.AsCollection<int>();
+    var response = await serverFactory.HttpClient.GetAsync("/api/values");
+    var values = response.AsCollection<int>();
     Assert.Equal(new[] { 1, 2, 3 }, values);
   }
 }
