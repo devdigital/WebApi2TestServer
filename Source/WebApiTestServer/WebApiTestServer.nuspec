@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>WebApi2TestServer</id>
-        <version>0.4.0</version>
+        <version>$version$</version>
         <authors>DevDigital</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Test helper for Web API 2</description>
@@ -10,10 +10,11 @@
             <group targetFramework=".NETFramework4.5">
                 <dependency id="Newtonsoft.Json" version="8.0.0" />
                 <dependency id="Microsoft.Owin" version="3.0.1" />
+                <dependency id="Microsoft.Owin.Testing" version="3.0.1" />
             </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="..\Source\WebApiTestServer\bin\Release\WebApiTestServer.dll" target="lib\net45\WebApiTestServer.dll" />
+        <file src="bin\Release\WebApiTestServer.dll" target="lib\net45\WebApiTestServer.dll" />
     </files>
 </package>

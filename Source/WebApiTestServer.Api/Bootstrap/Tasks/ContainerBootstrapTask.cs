@@ -10,6 +10,8 @@ namespace WebApiTestServer.Api.Bootstrap.Tasks
 
     using Dawn.WebApi;
 
+    using WebApiTestServer.Api.Repositories;
+
     public class ContainerBootstrapTask : IWebApiBootstrapTask
     {        
         private readonly Registrations registrations;
@@ -23,7 +25,9 @@ namespace WebApiTestServer.Api.Bootstrap.Tasks
         {
             var builder = new ContainerBuilder();
             builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-            
+
+            builder.RegisterType<DefaultValuesRepository>().As<IValuesRepository>();
+
             this.RegisterAdditional(builder);
 
             var container = builder.Build();
@@ -44,7 +48,7 @@ namespace WebApiTestServer.Api.Bootstrap.Tasks
 
             foreach (var instanceRegistration in this.registrations.InstanceRegistrations)
             {
-                builder.RegisterInstance(instanceRegistration.Value);
+                builder.RegisterInstance(instanceRegistration.Value).As(instanceRegistration.Key);
             }
         }
     }
