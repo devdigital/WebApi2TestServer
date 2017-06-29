@@ -5,7 +5,8 @@
 
     using Microsoft.Owin.Testing;
 
-    public class TestServerFactory
+    public abstract class TestServerFactory<TServerFactory> 
+        where TServerFactory : TestServerFactory<TServerFactory>
     {
         private readonly ITestStartup testStartup;
 
@@ -13,7 +14,7 @@
         
         private Dictionary<Type, object> InstanceRegistrations { get; }
 
-        public TestServerFactory(ITestStartup testStartup)
+        protected TestServerFactory(ITestStartup testStartup)
         {
             if (testStartup == null)
             {
@@ -26,7 +27,7 @@
             this.InstanceRegistrations = new Dictionary<Type, object>();
         }
 
-        public TestServerFactory With<TInterface, TImplementation>()
+        public TServerFactory With<TInterface, TImplementation>()
         {
             if (this.TypeRegistrations.ContainsKey(typeof(TInterface)))
             {
@@ -34,10 +35,10 @@
             }
 
             this.TypeRegistrations[typeof(TInterface)] = typeof(TImplementation);
-            return this;
+            return this as TServerFactory;
         }
 
-        public TestServerFactory With<TInterface>(object instance)
+        public TServerFactory With<TInterface>(object instance)
         {
             if (instance == null)
             {
@@ -50,7 +51,7 @@
             }
 
             this.InstanceRegistrations[typeof(TInterface)] = instance;
-            return this;
+            return this as TServerFactory;
         }
 
         public virtual TestServer Create()

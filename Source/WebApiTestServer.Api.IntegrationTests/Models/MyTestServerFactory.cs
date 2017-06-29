@@ -1,9 +1,16 @@
 namespace WebApiTestServer.Api.IntegrationTests.Models
 {
-    public class MyTestServerFactory : TestServerFactory
+    using Xunit.Abstractions;
+
+    public class MyTestServerFactory : TestServerFactory<MyTestServerFactory>
     {
         public MyTestServerFactory() : base(new TestStartup())
         {
+        }
+
+        public MyTestServerFactory WithLogging(ITestOutputHelper output)
+        {
+            return this;
         }
     }
 }

@@ -1,14 +1,30 @@
 ﻿namespace WebApiTestServer.Api.Controllers
 {
+    using System;
     using System.Web.Http;
+
+    using WebApiTestServer.Api.Repositories;
 
     public class ValuesController : ApiController
     {
+        private readonly IValuesRepository valuesRepository;
+
+        public ValuesController(IValuesRepository valuesRepository)
+        {
+            if (valuesRepository == null)
+            {
+                throw new ArgumentNullException(nameof(valuesRepository));
+            }
+
+            this.valuesRepository = valuesRepository;
+        }
+
         [HttpGet]
         [Route("api/values")]
         public IHttpActionResult GetValues()
         {
-            return this.Ok(new[] { 1, 2, 3 });
+            var values = this.valuesRepository.GetValues();
+            return this.Ok(values);
         }
     }
 }
