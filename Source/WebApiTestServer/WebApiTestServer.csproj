@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpClientExtensions.cs" />
     <Compile Include="HttpResponseMessageExtensions.cs" />
     <Compile Include="ITestStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

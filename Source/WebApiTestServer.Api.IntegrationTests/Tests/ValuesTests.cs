@@ -1,6 +1,7 @@
 ﻿namespace WebApiTestServer.Api.IntegrationTests.Tests
 {
     using System.Collections.Generic;
+    using System.Net;
     using System.Threading.Tasks;
 
     using Moq;
@@ -41,5 +42,16 @@
                 Assert.Equal(expectedValues, values);
             }
         }
-    }    
+
+        [Theory]
+        [AutoData]
+        public async Task AddValueReturns200(MyTestServerFactory testServerFactory, int value)
+        {            
+            using (var serverFactory = testServerFactory.Create())
+            {
+                var response = await serverFactory.HttpClient.PostAsync($"/api/values/{value}");                
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            }
+        }
+    }
 }

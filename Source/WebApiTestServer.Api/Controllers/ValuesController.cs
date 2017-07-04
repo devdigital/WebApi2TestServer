@@ -26,5 +26,13 @@
             var values = this.valuesRepository.GetValues();
             return this.Ok(values);
         }
+
+        [HttpPost]
+        [Route("api/values/{value}")]
+        public IHttpActionResult AddValue(int value)
+        {
+            var values = this.valuesRepository.GetValues();
+            return this.Ok(values);
+        }
     }
 }
