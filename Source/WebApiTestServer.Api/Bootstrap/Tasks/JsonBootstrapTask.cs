@@ -1,3 +1,7 @@
+// <copyright file="JsonBootstrapTask.cs" company="DevDigital">
+// Copyright (c) DevDigital. All rights reserved.
+// </copyright>
+
 namespace WebApiTestServer.Api.Bootstrap.Tasks
 {
     using System.Linq;
@@ -8,8 +12,13 @@ namespace WebApiTestServer.Api.Bootstrap.Tasks
 
     using Newtonsoft.Json.Serialization;
 
+    /// <summary>
+    /// JSON bootstrap task.
+    /// </summary>
+    /// <seealso cref="Dawn.WebApi.IWebApiBootstrapTask" />
     public class JsonBootstrapTask : IWebApiBootstrapTask
     {
+        /// <inheritdoc />
         public void Run(HttpConfiguration configuration)
         {
             var jsonFormatter = configuration.Formatters.OfType<JsonMediaTypeFormatter>().First();

@@ -1,7 +1,9 @@
+// <copyright file="ContainerBootstrapTask.cs" company="DevDigital">
+// Copyright (c) DevDigital. All rights reserved.
+// </copyright>
+
 namespace WebApiTestServer.Api.Bootstrap.Tasks
 {
-    using System;
-    using System.Collections.Generic;
     using System.Web.Http;
 
     using Autofac;
@@ -12,15 +14,27 @@ namespace WebApiTestServer.Api.Bootstrap.Tasks
 
     using WebApiTestServer.Api.Repositories;
 
+    /// <summary>
+    /// Container bootstrap task.
+    /// </summary>
+    /// <seealso cref="Dawn.WebApi.IWebApiBootstrapTask" />
     public class ContainerBootstrapTask : IWebApiBootstrapTask
-    {        
+    {
+        /// <summary>
+        /// The registrations
+        /// </summary>
         private readonly Registrations registrations;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContainerBootstrapTask"/> class.
+        /// </summary>
+        /// <param name="registrations">The registrations.</param>
         public ContainerBootstrapTask(Registrations registrations)
         {
             this.registrations = registrations;
         }
 
+        /// <inheritdoc />
         public void Run(HttpConfiguration configuration)
         {
             var builder = new ContainerBuilder();

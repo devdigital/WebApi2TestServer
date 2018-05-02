@@ -1,4 +1,8 @@
-﻿namespace WebApiTestServer.Api.IntegrationTests.Tests
+﻿// <copyright file="ValuesTests.cs" company="DevDigital">
+// Copyright (c) DevDigital. All rights reserved.
+// </copyright>
+
+namespace WebApiTestServer.Api.IntegrationTests.Tests
 {
     using System.Collections.Generic;
     using System.Net;
@@ -13,6 +17,10 @@
 
     using Xunit;
     using Xunit.Abstractions;
+
+    // ReSharper disable StyleCop.SA1600
+    #pragma warning disable SA1600
+    #pragma warning disable 1591
 
     public class ValuesTests
     {
@@ -46,10 +54,10 @@
         [Theory]
         [AutoData]
         public async Task AddValueReturns200(MyTestServerFactory testServerFactory, int value)
-        {            
+        {
             using (var serverFactory = testServerFactory.Create())
             {
-                var response = await serverFactory.HttpClient.PostAsync($"/api/values/{value}");                
+                var response = await serverFactory.HttpClient.PostAsync($"/api/values/{value}");
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }
